@@ -76,7 +76,7 @@ static int cmd_x(char *args){
 	printf("too few arguments!");
 	return 1;
   }
-	int num=atoi(ch);
+	int num; sscanf(ch,"%d",&num);
 	char *expr=strtok(NULL," ");
 	if(expr==NULL){
 	printf("too few arguments!");
@@ -88,16 +88,14 @@ static int cmd_x(char *args){
   }
 	char *str;	
 	swaddr_t addr=strtol(expr,&str,16);
-	int i,j;
+	int i;
+	printf("0x%08x: ",addr);
 	for(i=0;i<num;i++){
 	uint32_t data=swaddr_read(addr+i*4,4);
-	printf("0x%08x ",addr+i*4);
-	for(j=0;j<4;j++){
-	printf("0x%x ",data&0xff);
-	data=data>>8;
-	}	
+	printf("0x%x ",data);
+	}
 	printf("\n");
-  }
+  
 	return 0;
 
 }
