@@ -38,6 +38,69 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args){
+	char *ch=strtok(args," ");
+	if(ch==NULL){
+	 cpu_exec(1); return 0;}
+	int num=atoi(ch);
+	cpu_exec(num);
+	return 0;
+}
+
+static int cmd_info(char *args){
+	args=strtok(args," ");
+	if(strcmp(args,"r")==0){
+	printf("eax: %x\n",cpu.eax);
+	printf("edx: %x\n",cpu.edx);
+	printf("ecx: %x\n",cpu.ecx);
+	printf("ebx: %x\n",cpu.ebx);
+	printf("ebp: %x\n",cpu.ebp);
+	printf("esi: %x\n",cpu.esi);
+	printf("edi: %x\n",cpu.edi);
+	printf("esp: %x\n",cpu.esp);
+	return 0;
+	}
+	return 1;
+}
+
+static int cmd_x(char *args){
+	if(args==NULL){
+	printf("too few arguments!");
+	return 1;
+  }
+	char *ch=strtok(args," ");
+	if(ch==NULL){
+	printf("too few arguments!");
+	return 1;
+  }
+	int num=atoi(ch);
+	char *expr=strtok(NULL," ");
+	if(expr==NULL){
+	printf("too few arguments!");
+	return 1;
+  }
+	if(strtok(NULL," ")!=NULL){
+	printf("too many arguments!");
+	return 1;
+  }
+	char *str;	
+	swaddr_t addr=strtol(expr,&str,16);
+	int i,j;
+	for(i=0;i<num;i++){
+	uint32_t data=swaddr_read(addr+i*4,4);
+	printf("0x%08x ",addr+i*4);
+	for(j=0;j<4;j++){
+	printf("0x%02x ",data&0xff);
+	data=data>>8;
+	}	
+	printf("\n");
+  }
+	return 0;
+
+}
+	
+	
+
 static struct {
 	char *name;
 	char *description;
@@ -46,6 +109,10 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
+	{ "si","Single step",cmd_si },
+	{ "info","Print the rigisters",cmd_info},
+	{ "x","Scanf the memory",cmd_x}
+	
 
 	/* TODO: Add more commands */
 
