@@ -42,7 +42,8 @@ static int cmd_si(char *args){
 	char *ch=strtok(args," ");
 	if(ch==NULL){
 	 cpu_exec(1); return 0;}
-	int num=atoi(ch);
+	int num;
+	sscanf(ch,"%d",&num);
 	cpu_exec(num);
 	return 0;
 }
