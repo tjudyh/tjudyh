@@ -114,7 +114,7 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si","Single step",cmd_si },
 	{ "info","Print the rigisters",cmd_info},
-	{ "x","Scanf the memory",cmd_x}
+	{ "x","Scanf the memory",cmd_x},
 	
 
 	/* TODO: Add more commands */
