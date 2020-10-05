@@ -260,7 +260,7 @@ int eval(int p,int q){
 		}
 		if(((q-p==1)||(tokens[p+1].type==40&&tokens[q].type==41))&&tokens[p].type==LOGICAL_NOT){
 			result=eval(p+1,q);
-			return result;
+			return !result;
 		}
 		if(((q-p==1)||(tokens[p+1].type==40&&tokens[q].type==41))&&tokens[p].type==Pointor){
 			result=swaddr_read(eval(p+1,q),4);
