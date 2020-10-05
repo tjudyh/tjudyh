@@ -99,6 +99,13 @@ static int cmd_x(char *args){
 	return 0;
 
 }
+
+static int cmd_p(char *args){
+	bool success;
+	int result=expr(args,&success);
+	printf("%d\n",result);
+	return 0;
+}
 	
 	
 
@@ -113,6 +120,7 @@ static struct {
 	{ "si","Single step",cmd_si },
 	{ "info","Print the rigisters",cmd_info},
 	{ "x","Scanf the memory",cmd_x},
+	{ "p","Expression Evaluation",cmd_p},
 	
 
 	/* TODO: Add more commands */
