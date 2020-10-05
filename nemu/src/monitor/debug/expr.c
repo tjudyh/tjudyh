@@ -54,6 +54,7 @@ void init_regex() {
 	char error_msg[128];
 	int ret;
 
+
 	for(i = 0; i < NR_REGEX; i ++) {
 		ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
 		if(ret != 0) {
@@ -229,8 +230,8 @@ int eval(int p,int q){
 		else if(tokens[p].type==Register){
 			int j;int sl=1;int sw=1;
 			for(j=0;j<8&&sl!=0&&sw!=0;j++){
-				sl=strcmp(tokens[p].str,regsl[j]);
-				sw=strcmp(tokens[p].str,regsw[j]);
+				sl=strcmp(tokens[p].str+1,regsl[j]);
+				sw=strcmp(tokens[p].str+1,regsw[j]);
 			}
 			if(sl==0) return cpu.gpr[j]._32;
 			else if(sw==0) return cpu.gpr[j]._16;
