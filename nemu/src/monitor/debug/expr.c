@@ -35,10 +35,11 @@ static struct rule {
 	{"&&",LOGICAL_AND,2},
 	{"\\|\\|",LOGICAL_OR,1},
 	{"!",LOGICAL_NOT,6},
+	{"0[xX][a-f0-9]{1,8}",Hex,0},
 	{"\\$[a-d][hl]|\\$e?(ax|dx|cx|bx|bp|si|di|sp)",Register,0},
 	{"[A-Za-z][A-Za-z0-9_]*",Variable,0},
 	{"[0-9]{1,10}",Number,0},
-	{"0[xX][a-f0-9]{1,8}",Hex,0},				
+					
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
