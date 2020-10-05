@@ -252,7 +252,7 @@ int eval(int p,int q){
 	else if(check_parentheses(p,q)==true)  return eval(p+1,q-1);
 	else{
 		int op,val1,val2;
-		if((q-p==1)&&tokens[p].type=='-'){
+		if((q-p==1)&&tokens[p].type==Minus){
 			result=0-eval(q,q);
 			return result;
 		}
@@ -260,7 +260,7 @@ int eval(int p,int q){
 			result=eval(p+1,q);
 			return result;
 		}
-		if(((q-p==1)||(tokens[p+1].type==40&&tokens[q].type==41))&&tokens[p].type=='*'){
+		if(((q-p==1)||(tokens[p+1].type==40&&tokens[q].type==41))&&tokens[p].type==Pointor){
 			result=swaddr_read(eval(p+1,q),4);
 			return result;
 		}
