@@ -197,7 +197,7 @@ bool check_parentheses(int p,int q){
 }
 
 int dominant_operator(int p,int q){
-	int i;int dominant=p;int L_coun=0;
+	int i;int dominant=p;int L_coun=0;int min_pri=10;
 	for(i=p;i<=q;i++){
 		if(tokens[i].type==40){
 			L_coun++;i++;
@@ -210,7 +210,9 @@ int dominant_operator(int p,int q){
 			if(i>q) break;
 		}
 		else if(tokens[i].type==264||tokens[i].type==262||tokens[i].type==263) continue;
-		else if(tokens[i].priority<tokens[dominant].priority) dominant=i;
+		else if(tokens[i].priority<=min_pri) {
+			dominant=i; min_pri=tokens[i].priority;
+		}
 	}
 	return dominant;
 } 
