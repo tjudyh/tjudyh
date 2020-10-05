@@ -253,7 +253,7 @@ int eval(int p,int q){
 	else{
 		int op,val1,val2;
 		if((q-p==1)&&tokens[p].type==Minus){
-			result=0-eval(q,q);
+			result=-eval(q,q);
 			return result;
 		}
 		if(((q-p==1)||(tokens[p+1].type==40&&tokens[q].type==41))&&tokens[p].type==LOGICAL_NOT){
