@@ -210,7 +210,7 @@ int dominant_operator(int p,int q){
 			if(i>q) break;
 		}
 		else if(tokens[i].type==264||tokens[i].type==262||tokens[i].type==263) continue;
-		else if(tokens[i].priority>tokens[dominant].priority) dominant=i;
+		else if(tokens[i].priority<tokens[dominant].priority) dominant=i;
 	}
 	return dominant;
 } 
