@@ -63,6 +63,10 @@ static int cmd_info(char *args){
 	printf("esp: %x\n",cpu.esp);
 	return 0;
 	}
+	if(strcmp(args,"w")==0){
+		print_wp();
+		return 0;
+	}
 	return 1;
 }
 
@@ -106,7 +110,24 @@ static int cmd_p(char *args){
 	printf("%d\n",result);
 	return 0;
 }
-	
+
+static int cmd_w(char *args){
+	WP *f;
+	f=new_wp();
+	bool suc;
+	f->val=expr(args,&suc);
+	strcpy(f->expr,args);
+	if(!suc) Assert(1,"Wrong Input!");
+	printf("New Watchpoint: %d  %s  0x%x\n",f->NO,f->expr,f->val);
+	return 0;
+}
+
+static int cmd_d(char *args){
+	int num;
+	sscanf(args,"%d",&num);
+	free_wp(num);
+	return 0;
+}
 	
 
 static struct {
@@ -121,6 +142,10 @@ static struct {
 	{ "info","Print the rigisters",cmd_info},
 	{ "x","Scanf the memory",cmd_x},
 	{ "p","Expression Evaluation",cmd_p},
+	{ "w","Set a watchpoint",cmd_w},
+	{ "d","Delete a watchpoint",cmd_d},
+	
+	
 	
 
 	/* TODO: Add more commands */
